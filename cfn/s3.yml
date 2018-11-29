@@ -1,3 +1,17 @@
 ---
 AWSTemplateFormatVersion: 2010-09-09
 Resources:
+  A:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: Private
+      LoggingConfiguration:
+        DestinationBucketName: !Ref 'B'
+    B:
+      Type: AWS::S3::Bucket
+      Properties:
+        AccessControl: LogDeliveryWrite
+  Outputs:
+    BucketName:
+      Value: !Ref 'A'
+      Description: A output logs in B.
